@@ -352,11 +352,7 @@ func (d *Driver) PalmLand() (err error) {
 
 // StartVideo tells Tello to send start info (SPS/PPS) for video stream.
 func (d *Driver) StartVideo() (err error) {
-	buf, _ := d.createPacket(videoStartCommand, 0x60, 0)
-	binary.Write(buf, binary.LittleEndian, int16(0x00)) // seq = 0
-	binary.Write(buf, binary.LittleEndian, CalculateCRC16(buf.Bytes()))
-
-	_, err = d.cmdConn.Write(buf.Bytes())
+	fmt.Fprintf(d.cmdConn, "streamon")
 	return
 }
 
