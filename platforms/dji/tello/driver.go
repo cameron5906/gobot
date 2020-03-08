@@ -283,18 +283,12 @@ func (d *Driver) Start() error {
 // Halt stops the driver.
 func (d *Driver) Halt() (err error) {
 	// send a landing command when we disconnect, and give it 500ms to be received before we shutdown
-	if d.cmdConn != nil {
-		d.Land()
-	}
-	time.Sleep(500 * time.Millisecond)
+	//d.Land()
+	//time.Sleep(500 * time.Millisecond)
 
 	// TODO: cleanly shutdown the goroutines that are handling the UDP connections before closing
-	if d.cmdConn != nil {
-		d.cmdConn.Close()
-	}
-	if d.cmdConn != nil {
-		d.videoConn.Close()
-	}
+	//d.cmdConn.Close()
+	//d.videoConn.Close()
 	return
 }
 
