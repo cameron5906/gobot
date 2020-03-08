@@ -253,7 +253,6 @@ func (d *Driver) Start() error {
 	go func() {
 		d.On(d.Event(ConnectedEvent), func(interface{}) {
 			d.SendDateTime()
-			d.processVideo()
 		})
 
 		for {
