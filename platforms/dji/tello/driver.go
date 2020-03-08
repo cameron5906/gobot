@@ -256,6 +256,9 @@ func (d *Driver) Start() error {
 		})
 
 		for {
+			if d.cmdConn == nil {
+				return
+			}
 			err := d.handleResponse(cmdConn)
 			if err != nil {
 				fmt.Println("response parse error:", err)
@@ -288,6 +291,7 @@ func (d *Driver) Halt() (err error) {
 
 	// TODO: cleanly shutdown the goroutines that are handling the UDP connections before closing
 	d.cmdConn.Close()
+	d.cmdConn = nil
 	//d.videoConn.Close()
 	return
 }
